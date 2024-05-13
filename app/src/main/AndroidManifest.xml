@@ -15,12 +15,10 @@
         <activity
             android:name=".CompLocalDemoActivity"
             android:exported="false"
-            android:label="@string/title_activity_comp_local_demo"
             android:theme="@style/Theme.ComposeStudy" />
         <activity
             android:name=".StateExampleActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ComposeStudy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
