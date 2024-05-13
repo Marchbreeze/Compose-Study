@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,22 +35,18 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// MyTextField를 하나의 상태 변수, 그리고 입력에 따라 상태를 변경하는 하나의 이벤트 핸들러를 포함한 상태 컴포저블 함수로 만듬
 @Composable
 fun DemoScreen() {
-    MyTextField()
-}
-
-@Composable
-fun MyTextField() {
-    // by 키워드로 프로퍼티 delegation
-    var textState by remember { mutableStateOf("Hello") }
-    // 이벤트 핸들러에서 프로퍼티 직접 참조하지 않고도 접근 가능
+    var textState by rememberSaveable { mutableStateOf("Hello") }
     val onTextChange = { text: String ->
         textState = text
     }
-    // 현재 상태값을 TextField에 할당
-    TextField(value = textState, onValueChange = onTextChange)
+    MyTextField(text = textState, onTextChange = onTextChange)
+}
+
+@Composable
+fun MyTextField(text: String, onTextChange: (String) -> Unit) {
+    TextField(value = text, onValueChange = onTextChange)
 }
 
 @Composable
