@@ -8,8 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import march.breeze.compose.ui.theme.ComposeStudyTheme
@@ -39,14 +41,14 @@ fun DemoScreen() {
 
 @Composable
 fun MyTextField() {
-    // mutableStateOf 런타임 함수 호출 후 초기 상태값 전달 (현재 상태값 유지 위해 remember 키워드 활용)
-    var textState = remember { mutableStateOf("Hello") }
-    // MutableState 인스턴스의 value 프로퍼티를 읽고 설정해 상태를 업데이트
+    // by 키워드로 프로퍼티 delegation
+    var textState by remember { mutableStateOf("Hello") }
+    // 이벤트 핸들러에서 프로퍼티 직접 참조하지 않고도 접근 가능
     val onTextChange = { text: String ->
-        textState.value = text
+        textState = text
     }
     // 현재 상태값을 TextField에 할당
-    TextField(value = textState.value, onValueChange = onTextChange)
+    TextField(value = textState, onValueChange = onTextChange)
 
 }
 
