@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +50,20 @@ fun MyTextField() {
     }
     // 현재 상태값을 TextField에 할당
     TextField(value = textState, onValueChange = onTextChange)
+}
 
+@Composable
+fun FunctionA() {
+    var switchState by remember { mutableStateOf(true) }
+    var onSwitchChange = { value: Boolean ->
+        switchState = value
+    }
+    FunctionB(switchState = switchState, onSwitchChange = onSwitchChange)
+}
+
+@Composable
+fun FunctionB(switchState: Boolean, onSwitchChange: (Boolean) -> Unit) {
+    Switch(checked = switchState, onCheckedChange = onSwitchChange)
 }
 
 @Preview(showBackground = true)
@@ -57,5 +71,6 @@ fun MyTextField() {
 fun DefaultPreview() {
     ComposeStudyTheme {
         DemoScreen()
+        FunctionA()
     }
 }
