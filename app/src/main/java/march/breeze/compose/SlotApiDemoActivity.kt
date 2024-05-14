@@ -8,9 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -52,6 +56,27 @@ fun MainScreen() {
     val onTitleClick = { value: Boolean ->
         imageSelected = value
     }
+
+    ScreenContent(
+        linearSelected = linearSelected,
+        imageSelected = imageSelected,
+        onLinearClick = onLinearClick,
+        onTitleClick = onTitleClick,
+        titleContent = {
+            if (imageSelected) {
+                Text("Selected")
+            } else {
+                Text("Unselected")
+            }
+        },
+        progressContent = {
+            if (linearSelected) {
+                LinearProgressIndicator(Modifier.height(40.dp))
+            } else {
+                CircularProgressIndicator(Modifier.size(200.dp), strokeWidth = 18.dp)
+            }
+        }
+    )
 }
 
 // 화면 컨텐츠를 표시하는 컴포저블 추가
@@ -61,13 +86,22 @@ fun ScreenContent(
     imageSelected: Boolean,
     onLinearClick: (Boolean) -> Unit,
     onTitleClick: (Boolean) -> Unit,
+    titleContent: @Composable () -> Unit,
+    progressContent: @Composable () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-
+        titleContent()
+        progressContent()
+        CheckBoxes(
+            linearSelected = linearSelected,
+            imageSelected = imageSelected,
+            onLinearClick = onLinearClick,
+            onTitleClick = onTitleClick
+        )
     }
 }
 
@@ -91,13 +125,8 @@ fun CheckBoxes(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showSystemUi = true)
 @Composable
 fun DemoPreview() {
-    CheckBoxes(
-        linearSelected = true,
-        imageSelected = true,
-        onTitleClick = {},
-        onLinearClick = {},
-    )
+    MainScreen()
 }
