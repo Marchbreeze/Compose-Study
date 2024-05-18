@@ -47,9 +47,10 @@ class ModifierDemoActivity : ComponentActivity() {
 
 @Composable
 fun DemoScreen2() {
-    val modifier = Modifier
+    val firstModifier = Modifier
         .border(width = 2.dp, color = Color.Blue)
         .padding(all = 10.dp)
+    val secondModifier = Modifier.height(100.dp)
     Column(
         Modifier.padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,7 +58,7 @@ fun DemoScreen2() {
     ) {
         Text(
             text = "Hello",
-            modifier = modifier,
+            modifier = firstModifier.then(secondModifier),
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )
