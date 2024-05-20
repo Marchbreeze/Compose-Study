@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -97,10 +98,21 @@ fun MainScreen3() {
     }
 }
 
+@Composable
+fun MainScreen4() {
+    Row(
+        modifier = Modifier.height(200.dp)
+    ) {
+        TextCell(text = "1", Modifier.align(Alignment.Top))
+        TextCell(text = "2", Modifier.align(Alignment.CenterVertically))
+        TextCell(text = "3", Modifier.align(Alignment.Bottom))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
     ComposeStudyTheme {
-        MainScreen3()
+        MainScreen4()
     }
 }
