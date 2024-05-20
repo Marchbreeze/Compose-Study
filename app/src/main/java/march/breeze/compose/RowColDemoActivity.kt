@@ -3,6 +3,7 @@ package march.breeze.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -109,10 +112,36 @@ fun MainScreen4() {
     }
 }
 
+@Composable
+fun MainScreen5() {
+    Row {
+        Text(
+            text = "Large Text\nMore Text",
+            Modifier
+                .alignBy(FirstBaseline)
+                .background(Color.Green),
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "Small Text",
+            Modifier
+                .paddingFrom(
+                    alignmentLine = FirstBaseline,
+                    before = 80.dp,
+                    after = 20.dp
+                )
+                .background(Color.Gray),
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
     ComposeStudyTheme {
-        MainScreen4()
+        MainScreen5()
     }
 }
