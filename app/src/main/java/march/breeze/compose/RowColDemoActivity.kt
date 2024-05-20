@@ -90,14 +90,10 @@ fun MainScreen2() {
 
 @Composable
 fun MainScreen3() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier.size(width = 400.dp, height = 200.dp)
-    ) {
-        TextCell(text = "1")
-        TextCell(text = "2")
-        TextCell(text = "3")
+    Row {
+        TextCell(text = "1", Modifier.weight(weight = 0.2f, fill = true))
+        TextCell(text = "2", Modifier.weight(weight = 0.4f, fill = true))
+        TextCell(text = "3", Modifier.weight(weight = 0.3f, fill = true))
     }
 }
 
@@ -142,6 +138,6 @@ fun MainScreen5() {
 @Composable
 fun GreetingPreview3() {
     ComposeStudyTheme {
-        MainScreen5()
+        MainScreen3()
     }
 }
