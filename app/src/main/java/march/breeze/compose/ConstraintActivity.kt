@@ -45,11 +45,17 @@ fun MyButton(text: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun MainScreen9() {
-    ConstraintLayout(Modifier.size(200.dp, 200.dp)) {
+    ConstraintLayout(Modifier.size(400.dp, 200.dp)) {
         val (button1, button2, button3) = createRefs()
+        createHorizontalChain(button1, button2, button3)
         MyButton(text = "Button1", Modifier.constrainAs(button1) {
-            top.linkTo(parent.top, margin = 60.dp)
-            start.linkTo(parent.start, margin = 30.dp)
+            centerVerticallyTo(parent)
+        })
+        MyButton(text = "Button2", Modifier.constrainAs(button2) {
+            centerVerticallyTo(parent)
+        })
+        MyButton(text = "Button3", Modifier.constrainAs(button3) {
+            centerVerticallyTo(parent)
         })
     }
 }
