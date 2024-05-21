@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import march.breeze.compose.ui.theme.ComposeStudyTheme
 
 class ConstraintActivity : ComponentActivity() {
@@ -47,14 +48,22 @@ fun MyButton(text: String, modifier: Modifier = Modifier) {
 fun MainScreen9() {
     ConstraintLayout(Modifier.size(400.dp, 200.dp)) {
         val (button1, button2, button3) = createRefs()
+
         createHorizontalChain(button1, button2, button3)
         MyButton(text = "Button1", Modifier.constrainAs(button1) {
             centerVerticallyTo(parent)
         })
+
+        val barrier = createBottomBarrier(button1, button3)
+
         MyButton(text = "Button2", Modifier.constrainAs(button2) {
-            centerVerticallyTo(parent)
+            linkTo(button3.bottom, parent.bottom)
+            height = Dimension.fillToConstraints
+            top.linkTo(barrier)
         })
+
         val guide = createGuidelineFromTop(fraction = 0.2f)
+
         MyButton(text = "Button3", Modifier.constrainAs(button3) {
             top.linkTo(guide)
         })
