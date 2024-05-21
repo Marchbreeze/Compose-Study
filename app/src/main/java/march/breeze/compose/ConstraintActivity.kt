@@ -54,8 +54,9 @@ fun MainScreen9() {
         MyButton(text = "Button2", Modifier.constrainAs(button2) {
             centerVerticallyTo(parent)
         })
+        val guide = createGuidelineFromTop(fraction = 0.2f)
         MyButton(text = "Button3", Modifier.constrainAs(button3) {
-            centerVerticallyTo(parent)
+            top.linkTo(guide)
         })
     }
 }
