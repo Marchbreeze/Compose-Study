@@ -11,9 +11,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import march.breeze.compose.ui.theme.ComposeStudyTheme
 
@@ -70,10 +73,35 @@ fun MainScreen9() {
     }
 }
 
+private fun myConstraintSet(margin: Dp): ConstraintSet {
+    return ConstraintSet {
+        val button1 = createRefFor("button1")
+        constrain(button1) {
+            linkTo(
+                parent.top, parent.bottom,
+                topMargin = margin, bottomMargin = margin
+            )
+            linkTo(
+                parent.start, parent.end,
+                startMargin = margin, endMargin = margin
+            )
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        }
+    }
+}
+
+@Composable
+fun MainScreen10() {
+    ConstraintLayout(Modifier.size(200.dp, 200.dp)) {
+        MyButton(text = "Button1", Modifier.size(200.dp).layoutId("button1"))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview7() {
     ComposeStudyTheme {
-        MainScreen9()
+        MainScreen10()
     }
 }
