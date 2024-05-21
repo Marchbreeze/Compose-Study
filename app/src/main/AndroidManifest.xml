@@ -13,6 +13,10 @@
         android:theme="@style/Theme.ComposeStudy"
         tools:targetApi="31">
         <activity
+            android:name=".ConstraintActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ComposeStudy" />
+        <activity
             android:name=".CustomLayoutActivity"
             android:exported="false"
             android:theme="@style/Theme.ComposeStudy" />
