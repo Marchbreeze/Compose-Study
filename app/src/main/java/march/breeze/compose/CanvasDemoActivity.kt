@@ -14,7 +14,9 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.inset
@@ -22,6 +24,8 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import march.breeze.compose.ui.theme.ComposeStudyTheme
+import kotlin.math.PI
+import kotlin.math.sin
 
 class CanvasDemoActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +46,7 @@ class CanvasDemoActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen15() {
-    DrawLine()
-    DrawArc()
+    DrawPoints()
 }
 
 @Composable
@@ -146,6 +149,50 @@ fun DrawArc() {
             sweepAngle = 90f,
             useCenter = false,
             size = size / 2f,
+        )
+    }
+}
+
+@Composable
+fun DrawPath() {
+    Canvas(modifier = Modifier.size(300.dp)) {
+
+        val path = Path().apply {
+            moveTo(0f, 0f)
+            quadraticBezierTo(
+                50.dp.toPx(), 200.dp.toPx(),
+                300.dp.toPx(), 300.dp.toPx()
+            )
+            lineTo(270.dp.toPx(), 100.dp.toPx())
+            quadraticBezierTo(60.dp.toPx(), 80.dp.toPx(), 0f, 0f)
+            close()
+        }
+        drawPath(
+            path = path,
+            Color.Blue,
+        )
+    }
+}
+
+@Composable
+fun DrawPoints() {
+    Canvas(modifier = Modifier.size(300.dp)) {
+
+        val height = size.height
+        val width = size.width
+
+        val points = mutableListOf<Offset>()
+
+        for (x in 0..size.width.toInt()) {
+            val y = (sin(x * (2f * PI / width))
+                    * (height / 2) + (height / 2)).toFloat()
+            points.add(Offset(x.toFloat(), y))
+        }
+        drawPoints(
+            points = points,
+            strokeWidth = 3f,
+            pointMode = PointMode.Points,
+            color = Color.Blue
         )
     }
 }
