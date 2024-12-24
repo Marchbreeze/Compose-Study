@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -41,7 +43,7 @@ class CanvasDemoActivity : ComponentActivity() {
 @Composable
 fun MainScreen15() {
     DrawLine()
-    DrawRotatedRect()
+    DrawArc()
 }
 
 @Composable
@@ -101,6 +103,50 @@ fun DrawRotatedRect() {
                 size = size / 2f
             )
         }
+    }
+}
+
+@Composable
+fun DrawCircle() {
+    Canvas(modifier = Modifier.size(300.dp)) {
+        drawCircle(
+            color = Color.Gray,
+            center = center,
+            radius = 120.dp.toPx()
+        )
+    }
+}
+
+@Composable
+fun DrawGradientCircle() {
+    Canvas(modifier = Modifier.size(300.dp)) {
+        val colorList: List<Color> = listOf(Color.Blue, Color.Black)
+
+        val brush = Brush.horizontalGradient(
+            colors = colorList,
+            startX = 0.0f,
+            endX = 300.dp.toPx(),
+            tileMode = TileMode.Repeated
+        )
+
+        drawCircle(
+            brush = brush,
+            center = center,
+            radius = 120.dp.toPx()
+        )
+    }
+}
+
+@Composable
+fun DrawArc() {
+    Canvas(modifier = Modifier.size(300.dp)) {
+        drawArc(
+            color = Color.Gray,
+            startAngle = 20f,
+            sweepAngle = 90f,
+            useCenter = false,
+            size = size / 2f,
+        )
     }
 }
 
