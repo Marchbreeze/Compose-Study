@@ -1,4 +1,4 @@
-package march.breeze.compose
+package march.breeze.compose.viewModelDemo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

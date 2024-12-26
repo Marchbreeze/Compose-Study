@@ -1,4 +1,4 @@
-package march.breeze.compose
+package march.breeze.compose.viewModelDemo
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
